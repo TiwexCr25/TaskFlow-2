@@ -12,3 +12,8 @@ export function createTask(taskData) {
 export function showAllTasks() {
     return tasks
 }
+
+export function getTaskByID(id) {
+    return tasks.find(task => task.id === id);
+    //return tasks.find(id => { id === tasks.id });
+}

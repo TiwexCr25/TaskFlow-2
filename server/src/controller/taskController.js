@@ -1,6 +1,7 @@
 import {
     createTask,
-    showAllTasks
+    showAllTasks,
+    getTaskByID
 } from "../services/taskServices.js"
 
 export function postTask(req, res) {
@@ -8,7 +9,18 @@ export function postTask(req, res) {
     return res.status(201).json(task);
 }
 
-export function getTask(req, res) {
+export function getTasks(req, res) {
     const tasks = showAllTasks();
     return res.status(200).json(tasks);
+}
+
+export function getTask(req, res) {
+    const id = req.params.id;
+    const task = getTaskByID(id);
+    if (!task) {
+        return res.status(404).json({
+            error: "tarea no encontrada"
+        });
+    }
+    return res.status(200).json(task);
 }
