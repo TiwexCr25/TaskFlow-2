@@ -19,8 +19,10 @@ export function showAllTasks() {
 }
 
 export function getTaskByID(id) {
-    return tasks.find(task => task.id === id);
-    //return tasks.find(id => { id === tasks.id });
+    return db.prepare(`
+        SELECT * FROM tasks
+        WHERE id = ?
+        `).get(id);
 }
 
 export function deleteTaskbyID(id) {
