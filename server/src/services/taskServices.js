@@ -33,15 +33,9 @@ export function deleteTaskbyID(id) {
 }
 
 export function updateTaskByID(id, body) {
-    const index = tasks.findIndex(t => t.id === id);
-    if (index !== -1) {
-        tasks[index] = {
-            id: tasks[index].id,
-            title: body.title,
-            description: body.description,
-            priority: body.priority
-        };
-        return true
-    }
-    return false
+    return db.prepare(`
+        UPDATE tasks
+        SET title = ?, description = ?, priority = ?
+        WHERE id = ?
+        `).run(body.title, body.description, body.priority, id);
 }

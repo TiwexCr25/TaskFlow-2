@@ -34,7 +34,7 @@ export function getTask(req, res) {
 
 export function deleteTask(req, res) {
     const id = req.params.id;
-    if (deleteTaskbyID(id).changes == 1) {
+    if (deleteTaskbyID(id).changes === 1) {
         res.status(200).json({
             ok: "tarea eliminada"
         })
@@ -48,7 +48,7 @@ export function deleteTask(req, res) {
 
 export function updateTask(req, res) {
     const id = req.params.id;
-    if (updateTaskByID(id, req.body)) {
+    if (updateTaskByID(id, req.body).changes === 1) {
         res.status(200).json({
             ok: "tarea modificada"
         })
