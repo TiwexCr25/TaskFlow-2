@@ -7,6 +7,11 @@ import {
 } from "../services/taskServices.js"
 
 export function postTask(req, res) {
+    if (typeof req.body.title !== "string" || !req.body.title.trim()) {
+        return res.status(400).json({
+            error: "titulo vacio"
+        })
+    }
     const task = createTask(req.body)
     return res.status(201).json(task);
 }

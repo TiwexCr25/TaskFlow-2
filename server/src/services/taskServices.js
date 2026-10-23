@@ -1,3 +1,5 @@
+import db from "../database/database.js";
+
 let tasks = [];
 
 export function createTask(taskData) {
@@ -5,12 +7,15 @@ export function createTask(taskData) {
         ...taskData,
         id: crypto.randomUUID()
     };
-    tasks.push(newTask);
+    db.prepare(`
+        INSERT INTO tasks (id, title, description, priority)
+        VALUES (?, ?, ?, ?)
+        `).run(newTask.id, newTask.title, newTask.description, newTask.priority);
     return newTask
 }
 
 export function showAllTasks() {
-    return tasks
+    return db.prepare(`SELECT * FROM tasks;`).all();
 }
 
 export function getTaskByID(id) {
