@@ -26,3 +26,17 @@ export function deleteTaskbyID(id) {
     }
     return false
 }
+
+export function updateTaskByID(id, body) {
+    const index = tasks.findIndex(t => t.id === id);
+    if (index !== -1) {
+        tasks[index] = {
+            id: tasks[index].id,
+            title: body.title,
+            description: body.description,
+            priority: body.priority
+        };
+        return true
+    }
+    return false
+}

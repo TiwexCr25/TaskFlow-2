@@ -2,7 +2,8 @@ import {
     createTask,
     showAllTasks,
     getTaskByID,
-    deleteTaskbyID
+    deleteTaskbyID,
+    updateTaskByID
 } from "../services/taskServices.js"
 
 export function postTask(req, res) {
@@ -31,6 +32,20 @@ export function deleteTask(req, res) {
     if (deleteTaskbyID(id)) {
         res.status(200).json({
             ok: "tarea eliminada"
+        })
+    }
+    else {
+        res.status(404).json({
+            error: "tarea no encontrada"
+        })
+    }
+}
+
+export function updateTask(req, res) {
+    const id = req.params.id;
+    if (updateTaskByID(id, req.body)) {
+        res.status(200).json({
+            ok: "tarea modificada"
         })
     }
     else {
