@@ -26,12 +26,10 @@ export function getTaskByID(id) {
 }
 
 export function deleteTaskbyID(id) {
-    const index = tasks.findIndex(t => t.id === id);
-    if (index !== -1) {
-        tasks.splice(index, 1);
-        return true
-    }
-    return false
+    return db.prepare(`
+        DELETE FROM tasks
+        WHERE id = ?
+        `).run(id);
 }
 
 export function updateTaskByID(id, body) {

@@ -34,7 +34,7 @@ export function getTask(req, res) {
 
 export function deleteTask(req, res) {
     const id = req.params.id;
-    if (deleteTaskbyID(id)) {
+    if (deleteTaskbyID(id).changes == 1) {
         res.status(200).json({
             ok: "tarea eliminada"
         })
